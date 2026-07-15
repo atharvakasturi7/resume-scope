@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../middleware/uploadMiddleware');
-const {getHealth, getAbout,getResume, searchApplicant,uploadResume,matchResumeToJob,generateCareerRoadmap} = require('../controllers/resumeController');
+const {getHealth, getAbout,getResume, searchApplicant,uploadResume,matchResumeToJob,generateCareerRoadmap,generateInterviewQuestionsController} = require('../controllers/resumeController');
 const {validSearch} = require('../middleware/loggerMiddleware')
 
 
@@ -23,6 +23,12 @@ router.post(
     '/resume/career-roadmap',
     upload.single('resumeFile'),
     generateCareerRoadmap
+);
+
+router.post(
+    '/resume/interview',
+    upload.single('resumeFile'),
+    generateInterviewQuestionsController
 );
 
 module.exports = router;

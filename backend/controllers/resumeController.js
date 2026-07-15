@@ -2,6 +2,7 @@ const { extractTextFromPdf } = require('../services/pdfServices');
 const { analyzeResume } = require('../services/aiService');
 const { analyzeJobMatch } = require('../services/jobMatchService');
 const { analyzeRoadmap } = require('../services/roadmapService');
+const { generateInterviewQuestions } = require("../services/interviewService");
 
 const getHealth = (req, res) => {
     res.send("I am fine");
@@ -206,6 +207,73 @@ const generateCareerRoadmap = async (req, res) => {
     }
 };
 
+
+async function generateInterviewQuestionsController(req, res) {
+    try {
+        // Validate uploaded resume
+        if (!req.file) {
+            return res.status(400).json({
+                message: "Resume file is required"
+            });
+        }
+
+        // Validate job description
+        const { jobDescription } = req.body;
+
+        if (!jobDescription || !jobDescription.trim()) {
+            return res.status(400).json({
+                message: "Job description is required"
+            });
+        }
+
+        // Extract resume text
+        const resumeText = await extractTextFromPdf(req.file.path);
+
+        console.log("--- Resume Text Extracted ---");
+        console.log("===== RESUME TEXT =====");
+        console.log(resumeText);
+        console.log("===== END RESUME TEXT =====");
+
+        // Validate extracted resume text
+        console.log("Step A - Resume extracted");
+
+        if (resumeText.trim().length < 200) {
+            return res.status(400).json({
+                message: "Unable to extract sufficient text from resume. Please upload a more ATS-friendly PDF."
+            });
+        }
+
+        // Generate interview questions
+
+        console.log("Step B - Calling Interview Service");
+
+        const interviewQuestions = await generateInterviewQuestions(
+            resumeText,
+            jobDescription
+        );
+
+        console.log("Step C - Interview Service Returned");
+        console.log(interviewQuestions);
+
+        // Send response
+        return res.status(200).json({
+            message: "Interview questions generated successfully",
+            interviewQuestions
+        });
+
+    } catch (error) {
+        console.log("--- Interview Question Generation Failed ---");
+        console.error(error);
+
+        return res.status(500).json({
+            message: "Interview Question Generation Failed",
+            error: error.message
+        });
+    }
+
+}
+
+
 module.exports = {
     getHealth,
     getAbout,
@@ -213,5 +281,6 @@ module.exports = {
     searchApplicant,
     uploadResume,
     matchResumeToJob,
-    generateCareerRoadmap
+    generateCareerRoadmap,
+    generateInterviewQuestionsController
 };
