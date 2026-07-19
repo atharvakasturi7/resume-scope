@@ -1,3 +1,3 @@
 export default function InterviewQuestions() {
-  return <h2>Interview Questions</h2>;
+  return <h1>Interview Questions</h1>;
 }

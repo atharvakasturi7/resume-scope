@@ -1,3 +1,3 @@
 export default function CareerRoadmap() {
-  return <h2>Career Roadmap</h2>;
+  return <h1>Career Roadmap</h1>;
 }

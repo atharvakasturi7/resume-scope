@@ -1,3 +1,10 @@
-export default function Card() {
-  return <h2>Card</h2>;
+import "./Card.css";
+
+export default function Card( {children} ) {
+  return (
+    <div
+      className="card">
+        {children}
+    </div>
+  );
 }

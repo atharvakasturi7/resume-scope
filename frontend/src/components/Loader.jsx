@@ -1,3 +1,12 @@
+import "./Loader.css";
+
 export default function Loader() {
-  return <h2>Loading...</h2>;
+  return (
+    <div className="loader-container">
+      <div className="loader"></div>
+      <p>Analyzing resume...</p>
+    </div>
+  );
 }
+
+

@@ -1,0 +1,29 @@
+.resume-upload-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.resume-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 36px;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.file-input {
+  padding: 10px;
+  border: 2px dashed #2563eb;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}

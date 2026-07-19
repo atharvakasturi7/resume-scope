@@ -1,3 +1,3 @@
 export default function JobMatch() {
-  return <h2>Job Match</h2>;
-}
+  return <h1>Job Match</h1>;
+} 
