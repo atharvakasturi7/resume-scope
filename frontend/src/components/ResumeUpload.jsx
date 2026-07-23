@@ -1,16 +1,20 @@
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 import { uploadResume } from "../services/resumeService";
 import Button from "./Button";
-import Card from "./Card";
+// import Card from "./Card";
 import Loader from "./Loader";
 import "./ResumeUpload.css";
+import { useContext } from "react";
+import ResumeContext from "../context/ResumeContext";
 
 
 export default function ResumeUpload() {
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [analysis, setAnalysis] = useState(null);
+  const { setAnalysis } = useContext(ResumeContext);
 
   const handleFileChange = (event) => {
     console.log("File Selected:", event.target.files[0]);
@@ -37,7 +41,7 @@ export default function ResumeUpload() {
       console.log(data);
 
       setAnalysis(data.analysis);
-
+      navigate("/ats");
     } catch (err) {
 
       console.error(err);
@@ -52,6 +56,7 @@ export default function ResumeUpload() {
 
 
   }
+
 
 
   return (
@@ -86,7 +91,7 @@ export default function ResumeUpload() {
         </p>
       )}
 
-      {analysis && (
+      {/* {analysis && (
         <Card>
           <h2>ATS Score: {analysis.atsScore}</h2>
 
@@ -114,7 +119,7 @@ export default function ResumeUpload() {
             ))}
           </ul>
         </Card>
-      )}
+      )} */}
 
 
 

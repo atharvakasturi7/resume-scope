@@ -4,11 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 import App from "./App";
+import { ResumeProvider } from "./context/ResumeContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <ResumeProvider>
+        <App />
+      </ResumeProvider>
     </BrowserRouter>
   </StrictMode>
 );

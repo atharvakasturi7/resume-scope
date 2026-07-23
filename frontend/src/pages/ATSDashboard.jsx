@@ -1,5 +1,12 @@
+import { useContext } from "react";
+import ResumeContext from "../context/ResumeContext";
+
+
 export default function ATSDashboard() {
-  return <Link to="/ats">
-    ATS Dashboard
-  </Link>;
+  const { analysis } = useContext(ResumeContext);
+  return (
+    <div>
+      <h1>ATS Dashboard</h1>
+    </div>
+  );
 }
