@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { uploadResume } from "../services/resumeService";
 import Button from "./Button";
 // import Card from "./Card";
@@ -14,7 +14,7 @@ export default function ResumeUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { setAnalysis } = useContext(ResumeContext);
+  const { setResumeFile, setAts } = useContext(ResumeContext);
 
   const handleFileChange = (event) => {
     console.log("File Selected:", event.target.files[0]);
@@ -35,12 +35,14 @@ export default function ResumeUpload() {
     formData.append("resumeFile", selectedFile)
 
     try {
-
       const data = await uploadResume(formData);
 
       console.log(data);
 
-      setAnalysis(data.analysis);
+      setResumeFile(selectedFile);
+
+      setAts(data.analysis);
+
       navigate("/ats");
     } catch (err) {
 
@@ -90,39 +92,6 @@ export default function ResumeUpload() {
           {error}
         </p>
       )}
-
-      {/* {analysis && (
-        <Card>
-          <h2>ATS Score: {analysis.atsScore}</h2>
-
-          <h3>Summary</h3>
-          <p>{analysis.summary}</p>
-
-          <h3>Strengths</h3>
-          <ul>
-            {analysis.strengths.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-
-          <h3>Weaknesses</h3>
-          <ul>
-            {analysis.weaknesses.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-
-          <h3>Suggestions</h3>
-          <ul>
-            {analysis.suggestions.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </Card>
-      )} */}
-
-
-
     </div>
 
   )
