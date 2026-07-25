@@ -2,23 +2,37 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadResume } from "../services/resumeService";
 import Button from "./Button";
-// import Card from "./Card";
 import Loader from "./Loader";
 import "./ResumeUpload.css";
 import { useContext } from "react";
 import ResumeContext from "../context/ResumeContext";
+import { getErrorMessage } from "../utils/errorHandler";
 
+const HTTP_STATUS = {
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
+  TOO_MANY_REQUESTS: 429,
+  INTERNAL_SERVER_ERROR: 500,
+};
 
 export default function ResumeUpload() {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { setResumeFile, setAts } = useContext(ResumeContext);
+  const {
+    setResumeFile,
+    setAts,
+    loading, setLoading,
+  } = useContext(ResumeContext);
+
+
 
   const handleFileChange = (event) => {
     console.log("File Selected:", event.target.files[0]);
+
     setSelectedFile(event.target.files[0]);
+    setError("");
   }
 
   const handleUpload = async () => {
@@ -48,7 +62,7 @@ export default function ResumeUpload() {
 
       console.error(err);
 
-      setError("Failed to analyze resume.");
+      setError(getErrorMessage(err));
 
     } finally {
 

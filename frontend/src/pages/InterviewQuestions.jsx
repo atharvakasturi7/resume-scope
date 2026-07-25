@@ -1,38 +1,74 @@
 import { useContext, useEffect } from "react";
 import ResumeContext from "../context/ResumeContext";
 import { generateInterview } from "../services/resumeService";
-
-
+import Loader from "../components/Loader";
+import { getErrorMessage } from "../utils/errorHandler";
+import { useNavigate } from "react-router-dom";
 
 
 export default function InterviewQuestions() {
-
+const navigate = useNavigate();
   const {
     resumeFile,
     jobDescription,
     interview,
     setInterview,
+    loading,
+    setLoading,
   } = useContext(ResumeContext);
 
   useEffect(() => {
+
+    if (!resumeFile || !jobDescription) {
+    navigate("/job-match", { replace: true });
+    return;
+}
+
     const fetchInterview = async () => {
+      
       const formData = new FormData();
 
       formData.append("resumeFile", resumeFile);
       formData.append("jobDescription", jobDescription);
 
-      const data = await generateInterview(formData);
+      try {
 
-      console.log(data);
+        setLoading(true);
 
-      setInterview(data.interviewQuestions);
+        const data = await generateInterview(formData);
+
+        setInterview(data.interviewQuestions);
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(getErrorMessage(error));
+
+      } finally {
+
+        setLoading(false);
+
+      }
     };
 
     fetchInterview();
-  }, []);
+  }, [
+  resumeFile,
+  jobDescription,
+  navigate,
+  setLoading,
+  setInterview,
+]);
+
+  if (loading) {
+    return (
+      <Loader message="Generating Interview Questions..." />
+    );
+  }
 
   if (!interview) {
-    return <h2>Loading...</h2>;
+    return null;
   }
 
   return (

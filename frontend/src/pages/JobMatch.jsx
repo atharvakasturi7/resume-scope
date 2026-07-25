@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ResumeContext from "../context/ResumeContext";
 import { matchJob } from "../services/resumeService";
 import { useNavigate } from "react-router-dom";
-
+import Loader from "../components/Loader";
+import { getErrorMessage } from "../utils/errorHandler";
 
 export default function JobMatch() {
   const navigate = useNavigate();
@@ -12,7 +13,17 @@ export default function JobMatch() {
     jobMatch,
     setJobDescription: setContextJobDescription,
     setJobMatch,
+    loading,
+    setLoading,
   } = useContext(ResumeContext);
+
+  useEffect(() => {
+
+  if (!resumeFile) {
+    navigate("/", { replace: true });
+  }
+
+}, [resumeFile, navigate]);
 
   const handleAnalyze = async () => {
     if (!jobDescription.trim()) {
@@ -27,6 +38,8 @@ export default function JobMatch() {
 
     try {
 
+      setLoading(true);
+
       const data = await matchJob(formData);
 
       console.log(data);
@@ -36,6 +49,13 @@ export default function JobMatch() {
     } catch (error) {
 
       console.error(error);
+
+      alert(getErrorMessage(error));
+
+    }
+    finally {
+
+      setLoading(false);
 
     }
   };
@@ -58,9 +78,14 @@ export default function JobMatch() {
 
           <br /><br />
 
-          <button onClick={handleAnalyze}>
-            Analyze Job Match
+          <button
+            onClick={handleAnalyze}
+            disabled={loading}
+          >
+            {loading ? "Analyzing..." : "Analyze Job Match"}
           </button>
+
+          {loading && <Loader />}
         </>
       )}
 

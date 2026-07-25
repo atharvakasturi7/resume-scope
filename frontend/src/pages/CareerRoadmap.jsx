@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react";
 import ResumeContext from "../context/ResumeContext";
 import { generateRoadmap } from "../services/resumeService";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
+import { getErrorMessage } from "../utils/errorHandler";
 
 export default function CareerRoadmap() {
 
@@ -11,30 +13,66 @@ export default function CareerRoadmap() {
     jobDescription,
     roadmap,
     setRoadmap,
+    loading,
+    setLoading,
   } = useContext(ResumeContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    if (!resumeFile || !jobDescription) {
+      navigate("/job-match", { replace: true });
+      return;
+    }
+
     const fetchRoadmap = async () => {
-      const formData = new FormData();
+      try {
 
-      formData.append("resumeFile", resumeFile);
-      formData.append("jobDescription", jobDescription);
+        setLoading(true);
 
-      const data = await generateRoadmap(formData);
+        const formData = new FormData();
 
-      console.log(data);
+        formData.append("resumeFile", resumeFile);
+        formData.append("jobDescription", jobDescription);
 
-      setRoadmap(data.roadmap);
+        const data = await generateRoadmap(formData);
+
+        console.log(data);
+
+        setRoadmap(data.roadmap);
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(getErrorMessage(error));
+
+      } finally {
+
+        setLoading(false);
+
+      }
     };
 
     fetchRoadmap();
-  }, []);
+  }, [
+  resumeFile,
+  jobDescription,
+  navigate,
+  setLoading,
+  setRoadmap,
+]);
 
+
+  if (loading) {
+    return (
+      <Loader message="Generating Career Roadmap..." />
+    );
+  }
 
   if (!roadmap) {
-    return <h2>Loading...</h2>;
+    return null;
   }
 
 

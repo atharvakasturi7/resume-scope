@@ -1,13 +1,23 @@
-import { useContext } from "react";
 import ResumeContext from "../context/ResumeContext";
 import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+
 
 export default function ATSDashboard() {
-  const { ats } = useContext(ResumeContext);
+  const { resumeFile, ats } = useContext(ResumeContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+
+    if (!resumeFile || !ats) {
+      navigate("/");
+    }
+
+  }, [resumeFile, ats, navigate]);
+
+
   if (!ats) {
-    return <h2>No analysis available.</h2>;
+    return null;
   }
 
 
