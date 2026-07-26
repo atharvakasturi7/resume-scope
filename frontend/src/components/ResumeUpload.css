@@ -1,13 +1,22 @@
 .resume-upload-container {
-  max-width: 900px;
-  margin: 40px auto;
+  max-width: 700px;
+  margin: 60px auto;
   padding: 20px;
 }
 
 .resume-title {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 36px;
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.resume-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
 .upload-section {
@@ -16,14 +25,71 @@
   gap: 20px;
 }
 
-.file-input {
-  padding: 10px;
-  border: 2px dashed #2563eb;
-  border-radius: 8px;
+.upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 18px 22px;
+
+  border: 2px dashed var(--primary-color);
+  border-radius: var(--radius);
+
+  background: white;
   cursor: pointer;
+
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.upload-box:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.file-icon {
+  font-size: 1.4rem;
+}
+
+.file-name {
+  flex: 1;
+  margin-left: 14px;
+
+  color: var(--text-primary);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.change-file {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 .error-message {
-  color: red;
-  font-weight: bold;
+  color: var(--error-color);
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .resume-upload-container {
+    margin: 30px auto;
+    padding: 16px;
+  }
+
+  .resume-title {
+    font-size: 2rem;
+  }
+
+  .upload-box {
+    padding: 16px;
+  }
+
+  .change-file {
+    margin-left: 10px;
+  }
 }

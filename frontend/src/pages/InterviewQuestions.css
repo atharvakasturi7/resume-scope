@@ -1,0 +1,27 @@
+.interview-page {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.interview-content h3 {
+  margin-top: 24px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.interview-content li {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.interview-content ol {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .interview-page {
+    margin: 30px auto;
+    padding: 16px;
+  }
+}

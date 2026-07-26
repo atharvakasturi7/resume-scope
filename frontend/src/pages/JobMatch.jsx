@@ -4,6 +4,9 @@ import { matchJob } from "../services/resumeService";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { getErrorMessage } from "../utils/errorHandler";
+import "./JobMatch.css";
+import Card from "../components/Card";
+import Button from "../components/Button";
 
 export default function JobMatch() {
   const navigate = useNavigate();
@@ -19,11 +22,15 @@ export default function JobMatch() {
 
   useEffect(() => {
 
-  if (!resumeFile) {
-    navigate("/", { replace: true });
-  }
+    if (!resumeFile) {
+      navigate("/", { replace: true });
+    }
 
-}, [resumeFile, navigate]);
+  }, [resumeFile, navigate]);
+
+  if (loading) {
+    return <Loader message="Analyzing Job Match..." />;
+  }
 
   const handleAnalyze = async () => {
     if (!jobDescription.trim()) {
@@ -42,13 +49,9 @@ export default function JobMatch() {
 
       const data = await matchJob(formData);
 
-      console.log(data);
-
       setJobMatch(data.analysis);
 
     } catch (error) {
-
-      console.error(error);
 
       alert(getErrorMessage(error));
 
@@ -62,97 +65,96 @@ export default function JobMatch() {
 
 
   return (
-    <div>
+    <div className="job-match-page">
+      <Card>
+        <h1 className="page-title">Job Match</h1>
 
-      <h1>Job Match</h1>
+        {!jobMatch && (
+          <>
+            <textarea
+              className="job-description-input"
+              placeholder="Paste the Job Description here..."
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              rows={12}
+            />
 
-      {!jobMatch && (
-        <>
-          <textarea
-            placeholder="Paste the Job Description here..."
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
-            rows={12}
-            cols={70}
-          />
+            <br /><br />
 
-          <br /><br />
-
-          <button
-            onClick={handleAnalyze}
-            disabled={loading}
-          >
-            {loading ? "Analyzing..." : "Analyze Job Match"}
-          </button>
-
-          {loading && <Loader />}
-        </>
-      )}
+            <Button
+              text="Analyze Job Match"
+              onClick={handleAnalyze}
+            />
+          </>
+        )}
 
 
-      {jobMatch && (
-        <div>
+        {jobMatch && (
+          <div className="results-section">
 
-          <h2>🎯 Match Overview</h2>
+            <h2>🎯 Match Overview</h2>
 
-          <h3>Match Score: {jobMatch.matchScore}%</h3>
+            <h3>Match Score: {jobMatch.matchScore}%</h3>
 
-          <h3>Match Level: {jobMatch.matchLevel}</h3>
+            <h3>Match Level: {jobMatch.matchLevel}</h3>
 
-          <h3>Seniority Alignment: {jobMatch.seniorityAlignment}</h3>
+            <h3>Seniority Alignment: {jobMatch.seniorityAlignment}</h3>
 
-          <h3>Summary</h3>
-          <p>{jobMatch.summary}</p>
+            <h3>Summary</h3>
+            <p>{jobMatch.summary}</p>
 
-          <h3>✅ Skills You Already Have</h3>
-          <ol>
-            {jobMatch.matchedSkills.map((skill, index) => (
-              <li key={index}>{skill}</li>
-            ))}
-          </ol>
+            <h3>✅ Skills You Already Have</h3>
+            <ol>
+              {jobMatch.matchedSkills.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ol>
 
-          <h3>📚 Skills to Learn</h3>
-          <ol>
-            {jobMatch.missingSkills.map((skill, index) => (
-              <li key={index}>{skill}</li>
-            ))}
-          </ol>
+            <h3>📚 Skills to Learn</h3>
+            <ol>
+              {jobMatch.missingSkills.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ol>
 
 
-          <h3>📈 Areas to Improve</h3>
+            <h3>📈 Areas to Improve</h3>
 
-          <h4>Experience Gap</h4>
-          <p>{jobMatch.experienceGap}</p>
+            <h4>Experience Gap</h4>
+            <p>{jobMatch.experienceGap}</p>
 
-          <h4>Skills You're Developing</h4>
+            <h4>Skills You're Developing</h4>
 
-          <ol>
-            {jobMatch.partialSkills.map((skill, index) => (
-              <li key={index}>{skill}</li>
-            ))}
-          </ol>
+            <ol>
+              {jobMatch.partialSkills.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ol>
 
-          <h3>💡 Recommendations</h3>
-          <ol>
-            {jobMatch.suggestions.map((suggestion, index) => (
-              <li key={index}>{suggestion}</li>
-            ))}
-          </ol>
+            <h3>💡 Recommendations</h3>
+            <ol>
+              {jobMatch.suggestions.map((suggestion, index) => (
+                <li key={index}>{suggestion}</li>
+              ))}
+            </ol>
 
-          <br /><br />
+            <div className="button-group">
 
-          <button onClick={() => navigate("/roadmap")}>
-            🚀 Generate Career Roadmap
-          </button>
+              <Button
+                text="Generate Career Roadmap"
+                onClick={() => navigate("/roadmap")}
+              />
 
-          <button
-            onClick={() => navigate("/interview")}
-            style={{ marginLeft: "10px" }}
-          >
-            🎤 Generate Interview Questions
-          </button>
-        </div>
-      )}
+              <Button
+                text="Generate Interview Questions"
+                onClick={() => navigate("/interview")}
+              />
+
+            </div>
+
+          </div>
+        )}
+      </Card>
     </div>
   );
 }

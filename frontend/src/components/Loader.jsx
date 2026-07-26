@@ -1,12 +1,10 @@
 import "./Loader.css";
 
-export default function Loader() {
+export default function Loader({ message = "Analyzing resume..." }) {
   return (
     <div className="loader-container">
       <div className="loader"></div>
-      <p>Analyzing resume...</p>
+      <p>{message}</p>
     </div>
   );
 }
-
-

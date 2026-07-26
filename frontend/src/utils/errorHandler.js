@@ -4,11 +4,22 @@ export const getErrorMessage = (err) => {
     return "🌐 No internet connection. Please try again.";
   }
 
-  if (err.response.status === 429) {
-    return "⚠️ Daily AI quota exceeded. Please try again tomorrow.";
+  const status = err.response.status;
+
+  if (status === 429) {
+    const message = err.response?.data?.error || "";
+
+    const match = message.match(/Please try again in (\d+)m([\d.]+)s/);
+    if (match) {
+      const minutes = match[1];
+
+      return `Daily AI usage limit reached. Please try again in ${minutes} minutes.`;
+    }
+
+    return "Daily AI usage limit reached. Please try again later.";
   }
 
-  if (err.response.status === 500) {
+  if (status === 500) {
     return "🚫 Server error. Please try again later.";
   }
 

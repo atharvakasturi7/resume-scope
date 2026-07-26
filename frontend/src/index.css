@@ -1,3 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #2563EB;
+  --primary-hover: #1D4ED8;
+
+  --success-color: #16A34A;
+  --warning-color: #F59E0B;
+  --error-color: #DC2626;
+
+  --background-color: #F8FAFC;
+  --card-color: #FFFFFF;
+  --border-color: #E2E8F0;
+
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+
+  --radius: 16px;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+  --primary-light: #F8FBFF;
+  --primary-light-hover: #EEF4FF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: var(--background-color);
+  color: var(--text-primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+
 ol {
   list-style-position: inside;
   padding-left: 0;
@@ -6,4 +71,22 @@ ol {
 ul {
   list-style-position: inside;
   padding-left: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+p,
+li,
+input,
+textarea,
+button {
+  font-family: inherit;
 }

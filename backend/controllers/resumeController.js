@@ -79,7 +79,9 @@ const uploadResume = async (req, res) => {
         console.log("--- Resume Analysis Failed ---");
         console.error(error);
 
-        return res.status(500).json({
+        const status = error.status || 500;
+
+        return res.status(status).json({
             message: "Resume analysis failed",
             error: error.message
         });
@@ -134,7 +136,8 @@ const matchResumeToJob = async (req, res) => {
         console.log("--- Job Match Failed ---");
         console.error(error);
 
-        return res.status(500).json({
+        const status = error.status || 500;
+        return res.status(status).json({
             message: "Job matching failed",
             error: error.message
         });
@@ -199,7 +202,8 @@ const generateCareerRoadmap = async (req, res) => {
         console.log("--- Career Roadmap Generation Failed ---");
         console.error(error);
 
-        return res.status(500).json({
+        const status = error.status || 500;
+        return res.status(status).json({
             message: "Career roadmap generation failed",
             error: error.message
         });
@@ -265,7 +269,8 @@ async function generateInterviewQuestionsController(req, res) {
         console.log("--- Interview Question Generation Failed ---");
         console.error(error);
 
-        return res.status(500).json({
+        const status = error.status || 500;
+        return res.status(status).json({
             message: "Interview Question Generation Failed",
             error: error.message
         });

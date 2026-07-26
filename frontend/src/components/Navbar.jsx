@@ -4,7 +4,9 @@ import "./Navbar.css";
 export default function Navbar() {
   return (
     <nav className="navbar">
-      
+
+      <h2 className="logo">ResumeIQ</h2>
+
       <div className="nav-links">
         <Link to="/">Home</Link>
 

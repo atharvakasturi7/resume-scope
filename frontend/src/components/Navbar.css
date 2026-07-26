@@ -3,27 +3,45 @@
   justify-content: space-between;
   align-items: center;
 
-  background-color: #2563eb;
+  background: var(--primary-color);
+  padding: 18px 40px;
 
-  padding: 18px 30px;
+  box-shadow: var(--shadow);
 }
 
-.navbar h2 {
+.logo {
   color: white;
   margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+  transition: opacity 0.2s ease;
 }
 
 .nav-links a:hover {
-  text-decoration:underline;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
 }

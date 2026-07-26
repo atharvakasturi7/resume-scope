@@ -1,0 +1,28 @@
+.roadmap-page {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.roadmap-content h3 {
+  margin-top: 24px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.roadmap-content p,
+.roadmap-content li {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.roadmap-content ul {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .roadmap-page {
+    margin: 30px auto;
+    padding: 16px;
+  }
+}
