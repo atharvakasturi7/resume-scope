@@ -33,3 +33,21 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
 
+const multer = require("multer");
+
+app.use((err, req, res, next) => {
+
+    if (err instanceof multer.MulterError) {
+        return res.status(400).json({
+            message: err.message
+        });
+    }
+
+    if (err) {
+        return res.status(err.status || 400).json({
+            message: err.message
+        });
+    }
+
+    next();
+});

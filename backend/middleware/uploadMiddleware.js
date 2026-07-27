@@ -31,7 +31,11 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === "application/pdf") {
         cb(null, true);
     } else {
-        cb(new Error("Only PDF files are allowed"), false);
+        const error = new Error(
+            "Only PDF files are supported. Please upload a PDF resume."
+        );
+        error.status = 400;
+        cb(error, false);
     }
 };
 
@@ -42,5 +46,7 @@ const upload = multer({
         fileSize: 5 * 1024 * 1024 // 5 MB
     }
 });
+
+
 
 module.exports = upload;

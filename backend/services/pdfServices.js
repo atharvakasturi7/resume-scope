@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { PDFParse } = require('pdf-parse'); 
+
 const extractTextFromPdf = async (filePath) => {
     try {
         // 1. Read file into a raw binary buffer
@@ -17,11 +18,29 @@ const extractTextFromPdf = async (filePath) => {
         // 5. FIXED: Return the result directly because it IS the extracted string text!
         return result.text; 
     } catch (error) {
-        console.error("Error reading PDF inside service:", error);
-        throw new Error("Failed to process the PDF document.");
-    }
+    console.error("Error reading PDF inside service:", error);
+
+    const pdfError = new Error(
+        "The uploaded PDF is corrupted, password-protected, or unreadable. Please upload a valid PDF."
+    );
+
+    pdfError.status = 400;
+
+    throw pdfError;
+}
 };
 
+function validateResumeText(text) {
+    if (!text || text.trim().length < 200) {
+        const error = new Error(
+            "Unable to extract sufficient text from the resume. Please upload a valid ATS-friendly PDF."
+        );
+        error.status = 400;
+        throw error;
+    }
+}
+
 module.exports = {
-    extractTextFromPdf
+    extractTextFromPdf,
+    validateResumeText
 };

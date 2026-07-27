@@ -1,8 +1,28 @@
-const { extractTextFromPdf } = require('../services/pdfServices');
+const { extractTextFromPdf, validateResumeText } = require('../services/pdfServices');
 const { analyzeResume } = require('../services/aiService');
 const { analyzeJobMatch } = require('../services/jobMatchService');
 const { analyzeRoadmap } = require('../services/roadmapService');
 const { generateInterviewQuestions } = require("../services/interviewService");
+const fs = require("fs");
+
+function deleteUploadedFile(file) {
+    console.log("deleteUploadedFile() called");
+
+    if (!file) {
+        console.log("No file found.");
+        return;
+    }
+
+    console.log("File path:", file.path);
+
+    fs.unlink(file.path, (err) => {
+        if (err) {
+            console.error("Delete failed:", err);
+        } else {
+            console.log("File deleted successfully.");
+        }
+    });
+}
 
 const getHealth = (req, res) => {
     res.send("I am fine");
@@ -36,6 +56,7 @@ const uploadResume = async (req, res) => {
     try {
         // Added 'await' here to wait for the class instance to finish resolving
         const extractedText = await extractTextFromPdf(req.file.path);
+        validateResumeText(extractedText);
 
         console.log("--- PDF Successfully Parsed ---");
 
@@ -82,9 +103,10 @@ const uploadResume = async (req, res) => {
         const status = error.status || 500;
 
         return res.status(status).json({
-            message: "Resume analysis failed",
-            error: error.message
+            message: error.message
         });
+    } finally {
+          deleteUploadedFile(req.file);
     }
 };
 
@@ -109,6 +131,8 @@ const matchResumeToJob = async (req, res) => {
 
         const resumeText = await extractTextFromPdf(req.file.path);
 
+        validateResumeText(resumeText);
+
         console.log("--- Resume Text Extracted ---");
 
         console.log("===== RESUME TEXT =====");
@@ -120,11 +144,7 @@ const matchResumeToJob = async (req, res) => {
             jobDescription
         );
 
-        if (resumeText.trim().length < 200) {
-            return res.status(400).json({
-                message: "Unable to extract sufficient text from resume. Please upload a more ATS-friendly PDF."
-            });
-        }
+
 
         return res.status(200).json({
             message: "Resume job match completed successfully",
@@ -138,10 +158,11 @@ const matchResumeToJob = async (req, res) => {
 
         const status = error.status || 500;
         return res.status(status).json({
-            message: "Job matching failed",
-            error: error.message
+            message: error.message
         });
 
+    } finally {
+         deleteUploadedFile(req.file);
     }
 };
 
@@ -164,14 +185,10 @@ const generateCareerRoadmap = async (req, res) => {
         }
 
         const resumeText = await extractTextFromPdf(req.file.path);
+        validateResumeText(resumeText);
 
         console.log("--- Resume Text Extracted ---");
 
-        if (resumeText.trim().length < 200) {
-            return res.status(400).json({
-                message: "Unable to extract sufficient text from resume. Please upload a more ATS-friendly PDF."
-            });
-        }
 
         const roadmap = await analyzeRoadmap(
             resumeText,
@@ -204,10 +221,11 @@ const generateCareerRoadmap = async (req, res) => {
 
         const status = error.status || 500;
         return res.status(status).json({
-            message: "Career roadmap generation failed",
-            error: error.message
+            message: error.message
         });
 
+    } finally {
+          deleteUploadedFile(req.file);
     }
 };
 
@@ -232,6 +250,7 @@ async function generateInterviewQuestionsController(req, res) {
 
         // Extract resume text
         const resumeText = await extractTextFromPdf(req.file.path);
+        validateResumeText(resumeText);
 
         console.log("--- Resume Text Extracted ---");
         console.log("===== RESUME TEXT =====");
@@ -241,13 +260,6 @@ async function generateInterviewQuestionsController(req, res) {
         // Validate extracted resume text
         console.log("Step A - Resume extracted");
 
-        if (resumeText.trim().length < 200) {
-            return res.status(400).json({
-                message: "Unable to extract sufficient text from resume. Please upload a more ATS-friendly PDF."
-            });
-        }
-
-        // Generate interview questions
 
         console.log("Step B - Calling Interview Service");
 
@@ -271,9 +283,10 @@ async function generateInterviewQuestionsController(req, res) {
 
         const status = error.status || 500;
         return res.status(status).json({
-            message: "Interview Question Generation Failed",
-            error: error.message
+            message: error.message
         });
+    } finally {
+          deleteUploadedFile(req.file);
     }
 
 }
