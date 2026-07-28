@@ -1,10 +1,11 @@
 <p align="center">
-  <img src="Assets/banner.png" alt="ResumeScope Banner" width="100%">
+
+  <img src="assets/banner.png" alt="ResumeScope Banner" width="100%">
+
 </p>
 
 <br>
 
-# ResumeScope
 # 🚀 ResumeScope
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
