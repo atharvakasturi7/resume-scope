@@ -137,6 +137,9 @@ export default function ResumeUpload() {
             onClick={handleUpload}
           />
 
+          <p className="ai-disclaimer">
+            ⚠️ AI-generated insights may contain inaccuracies. Please verify important recommendations.
+          </p>
 
 
         </div>
