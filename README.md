@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="ResumeScope Banner" width="100%">
+  <img src="Assets/banner.png" alt="ResumeScope Banner" width="100%">
 </p>
 
 <br>
