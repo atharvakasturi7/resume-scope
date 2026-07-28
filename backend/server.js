@@ -12,7 +12,7 @@ app.use(
     cors({
         origin: [
             "http://localhost:5173",
-            "https://resume-scope-32gofp8ns-atharva-kasturi.vercel.app",
+            "https://resume-scope-lac.vercel.app",
         ],
     })
 );
