@@ -88,13 +88,13 @@ export default function ResumeUpload() {
     <div className="resume-upload-container">
 
       <Card>
-
+{/* 
         <h1 className="resume-title">
-          AI Resume Analyzer
-        </h1>
+          ResumeScope
+        </h1> */}
 
         <p className="resume-subtitle">
-          Upload your resume and receive an AI-powered ATS analysis, job match insights, career roadmap, and interview questions.
+          <b>Upload your resume for ATS analysis, job matching, career roadmaps, and interview preparation.</b>
         </p>
 
         <div className="upload-section">

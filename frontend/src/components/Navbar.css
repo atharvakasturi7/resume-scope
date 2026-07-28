@@ -1,19 +1,47 @@
 .navbar {
+  height: 70px;
+  padding: 0 48px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  background: var(--primary-color);
-  padding: 18px 40px;
-
-  box-shadow: var(--shadow);
+  background: #3366e8;
+  /* your current blue */
+  box-sizing: border-box;
 }
 
-.logo {
+/* .logo {
   color: white;
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
+} */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+
+  text-decoration: none;
+  color: white;
+
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.logo-icon {
+  width: 50px;
+  height: 50px;
+  width: auto;
+}
+
+.logo span {
+  line-height: 1;
+}
+
+.logo:hover {
+    opacity: 0.9;
 }
 
 .nav-links {
