@@ -32,7 +32,20 @@ app.set("view engine", "ejs");
 
 // Home Route
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.status(200).json({
+        success: true,
+        application: "ResumeScope API",
+        status: "Running",
+        version: "1.0.0",
+        message: "Welcome to the ResumeScope Backend API 🚀",
+        endpoints: {
+            health: "/health",
+            uploadResume: "/resume/upload",
+            jobMatch: "/resume/match-job",
+            careerRoadmap: "/resume/career-roadmap",
+            interviewQuestions: "/resume/interview"
+        }
+    });
 });
 
 // Start Server
