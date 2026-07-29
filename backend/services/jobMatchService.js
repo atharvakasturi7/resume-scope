@@ -232,13 +232,35 @@ SENIORITY RULES
 
 Experience Evaluation Rules
 
-1. Compare the resume's relevant professional experience with the job's required experience.
+1. Compare BOTH professional experience AND practical project experience with the job requirements.
 
-2. If the candidate exceeds the required experience by more than 2 years, classify seniorityAlignment as "Overqualified".
+2. For internship and entry-level roles, personal projects, academic projects, hackathons, freelance work, and open-source contributions should be treated as valid practical experience.
 
-3. If the experience closely matches the requirement, classify as "Well Aligned".
+3. If the resume demonstrates multiple relevant software projects using the required technologies, do NOT state that the candidate lacks experience.
 
-4. Only use "Slightly Junior" or "Significantly Junior" when the candidate has LESS experience than required.
+4. Distinguish clearly between:
+   - Professional industry experience
+   - Practical project experience
+
+5. If the candidate has strong project experience but limited industry experience, explain this in the experienceGap instead of saying the candidate lacks experience.
+
+6. If the candidate exceeds the required professional experience by more than 2 years, classify seniorityAlignment as "Overqualified".
+
+7. If the experience closely matches the requirement, classify as "Well Aligned".
+
+8. Only use "Slightly Junior" or "Significantly Junior" when BOTH professional experience and relevant project experience are insufficient.
+
+INTERNSHIP EVALUATION RULES
+
+For internship and fresher positions:
+
+- Give significant weight to relevant projects.
+- Give significant weight to GitHub portfolios.
+- Give significant weight to deployed applications.
+- Give significant weight to hackathons and academic work.
+- Do not penalize candidates for lacking full-time industry experience if the role is an internship.
+- Project quality should meaningfully influence the overall match score.
+
 
 SCORING PHILOSOPHY
 
@@ -354,6 +376,8 @@ MongoDB Atlas → MongoDB
 * Such skills should not receive full match credit.
 
 * experienceGap must be a single sentence.
+
+If the candidate has relevant software projects but limited professional experience, clearly state that they possess practical project experience while lacking industry experience. Never state that the candidate has "no experience" when relevant projects exist.
 
 * seniorityAlignment must be one of:
   "Overqualified"

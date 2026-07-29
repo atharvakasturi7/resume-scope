@@ -48,6 +48,46 @@ OBJECTIVE
 Compare the resume against the job description and identify only the skills, technologies, frameworks, tools, databases, cloud platforms, testing frameworks, software engineering concepts, or knowledge areas that are clearly important for the target role but are NOT clearly demonstrated in the resume.
 Then generate a realistic and practical career improvement roadmap.
 
+JOB DESCRIPTION PREPROCESSING
+
+Before identifying missing skills, first identify and ignore any content that is NOT part of the actual hiring requirements.
+
+Ignore:
+
+- Company overview
+- Company history
+- About the organization
+- Salary or stipend
+- Perks and benefits
+- Number of openings
+- Internship duration
+- Work location
+- Application instructions
+- Eligibility criteria
+- Who can apply
+- Promotional content
+- Job portal advertisements
+- Certification advertisements
+- Suggested certifications
+- Recommended learning courses
+- "Learn..." sections (for example: Learn HTML, Learn VLSI, Learn AI in Data Science)
+- Footer content
+- Contact information
+
+ONLY use:
+
+- Job responsibilities
+- Required technical skills
+- Preferred technical skills
+- Technologies
+- Frameworks
+- Programming languages
+- Tools
+- Software engineering concepts
+- Experience requirements
+
+Never recommend learning skills that appear only in advertisements, suggested courses, certification promotions, or unrelated sections.
+
 SKILL IDENTIFICATION RULES
 
 Before recommending any skill:
@@ -68,11 +108,26 @@ Before recommending any skill:
 
 5. Recommend only genuine knowledge gaps that would significantly improve the candidate's suitability for the target role.
 
+6. For internship and entry-level roles, treat practical project experience as valid evidence of a skill even if the candidate lacks professional industry experience.
+
+7. If a technology is clearly demonstrated through one or more projects, do not recommend relearning that technology.
+
+8. Recommend the next logical skill instead of repeating an already demonstrated one.
+
 RULES
 
 1. Use evidence strictly from the resume and the job description.
 2. Never assume the candidate knows something unless it is clearly demonstrated in the resume.
 3. Do not recommend skills that are already clearly demonstrated in the resume.
+3.1 Evaluate the entire resume, including:
+
+- Technical Skills
+- Projects
+- Work Experience
+- Certifications
+- Technical Summary
+
+before deciding a skill is missing.
 4. Do not include vague generic skills such as "communication", "teamwork", "leadership", "problem solving", or "hardworking" unless they are explicitly required in the job description and are central to the role.
 5. Treat technologies, frameworks, tools, databases, cloud platforms, testing frameworks, programming concepts, software engineering concepts, and knowledge areas as skills when categorizing priorities.
 6. Prioritize recommendations based on their importance, frequency, and relevance in the job description.
@@ -93,7 +148,8 @@ Recommend SQL before Prisma.
     - MongoDB Aggregation
     - Unit Testing
     - CI/CD
-12. recommendedProjects must contain 3 to 5 practical portfolio-quality project ideas that directly help the candidate learn the missing high and medium priority skills.
+12. recommendedProjects must contain 3 to 5 practical portfolio-quality project ideas that directly strengthen the candidate's weakest areas identified from the resume and the genuine job requirements.
+    Do not recommend projects for technologies already demonstrated through existing projects unless the recommendation builds upon them with more advanced concepts.
 13. Every recommended project must:
     - be realistic for an individual developer,
     - be suitable for a software engineering portfolio,
@@ -107,7 +163,15 @@ Recommend SQL before Prisma.
     - "2-3 months"
     - "3-4 months"
     - "6 months"
-16. potentialMatchScoreAfterLearning must be a realistic INTEGER between 0 and 100.
+16. potentialMatchScoreAfterLearning must consider:
+
+- Remaining experience gap
+- Industry experience
+- Project quality
+- Education
+- Skills learned from the roadmap
+
+Do not assume completing the roadmap guarantees selection for the role.
 17. Do NOT assume completing the roadmap guarantees a perfect match. Consider remaining factors such as years of experience, domain expertise, certifications, and seniority before estimating the future score.
 18. If the resume is already a strong match, keep all priority skill arrays small and recommend only advanced or specialization topics instead of inventing unnecessary gaps.
 19. If there is insufficient evidence for any category, return an empty array for that category.
@@ -156,6 +220,18 @@ VALIDATION RULES
 * Do not repeat the same skill across multiple categories.
 * Do not include extra keys.
 * Return valid JSON only.
+
+JOB DESCRIPTION FILTERING
+
+Before generating the roadmap:
+
+1. Ignore company descriptions.
+2. Ignore perks and benefits.
+3. Ignore promotional content.
+4. Ignore certification advertisements.
+5. Ignore "Learn..." sections.
+6. Ignore suggested courses.
+7. Generate recommendations only from genuine hiring requirements.
 
 ====================
 RESUME

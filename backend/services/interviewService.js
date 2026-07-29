@@ -31,6 +31,44 @@ GROUNDING RULES
 - Never invent skills, projects, achievements, responsibilities, or experience.
 - Prefer realistic interviewer-style questions.
 
+JOB DESCRIPTION PREPROCESSING
+
+Before generating interview questions, identify and ignore any content that is NOT part of the actual hiring requirements.
+
+Ignore:
+
+- Company overview
+- Company history
+- About the organization
+- Perks and benefits
+- Salary or stipend
+- Number of openings
+- Internship duration
+- Work location
+- Application instructions
+- Eligibility criteria
+- "Who can apply"
+- Promotional content
+- Certification advertisements
+- Recommended learning courses
+- "Learn..." sections (for example: Learn HTML, Learn VLSI, Learn AI in Data Science)
+- Suggested certifications
+- Footer content
+- Contact information
+
+Generate questions ONLY from:
+
+- Job responsibilities
+- Required technical skills
+- Preferred technical skills
+- Technologies
+- Frameworks
+- Programming languages
+- Engineering responsibilities
+- Experience expectations
+
+Never generate interview questions from advertisements, certification suggestions, or promotional content.
+
 TECHNICAL QUESTIONS (Exactly 5)
 
 - Base questions on:
@@ -45,7 +83,7 @@ TECHNICAL QUESTIONS (Exactly 5)
   - Design decisions
   - Trade-offs
   - Domain-specific scenarios
-- If a required JD skill is missing from the resume, ask exploratory questions such as:
+If a genuine job requirement is missing from the resume, ask exploratory questions such as:
   - "Have you worked with Docker?"
   - "How would you learn Kubernetes if required?"
 - Avoid trivia.
@@ -68,6 +106,25 @@ PROJECT QUESTIONS (Exactly 5)
 
 Base questions ONLY on actual resume projects.
 
+For students and internship candidates:
+
+Treat substantial academic projects, personal projects, hackathons, and deployed applications as meaningful engineering experience.
+
+Ask questions that evaluate:
+
+- Architecture
+- Design decisions
+- API design
+- Error handling
+- Scalability
+- Security
+- Performance
+- Deployment
+- Testing
+- Future improvements
+
+Do not imply that projects are less valuable simply because they were not completed in a professional environment.
+
 Focus on:
 
 - Architecture
@@ -82,6 +139,17 @@ Focus on:
 
 If the resume contains very few projects, ask deeper questions about the available work instead of inventing projects.
 
+INTERNSHIP EVALUATION RULES
+
+If the role is an internship or entry-level position:
+
+- Focus on problem-solving ability.
+- Focus on projects.
+- Focus on learning ability.
+- Focus on engineering decisions.
+- Do not assume industry experience is required unless explicitly stated.
+- Tailor questions to evaluate internship readiness rather than senior-level experience.
+
 QUALITY RULES
 
 - Avoid duplicates.
@@ -89,6 +157,8 @@ QUALITY RULES
 - Mix easy, moderate, and challenging questions.
 - Do not number questions.
 - Do not return explanations.
+- Prefer questions that encourage the candidate to explain decisions rather than memorize definitions.
+- Avoid asking about technologies that are not genuine requirements of the job description.
 
 OUTPUT
 
