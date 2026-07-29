@@ -50,7 +50,47 @@ IMPORTANT RULES
   do NOT treat it as a full skill match.
   Add it to partialSkills instead of matchedSkills.
 
+JOB DESCRIPTION PREPROCESSING
 
+Before analyzing the job description, first identify and ignore any content that is NOT part of the actual hiring requirements.
+
+Ignore sections such as:
+
+- Company overview or company history
+- About the organization
+- Perks and benefits
+- Salary or stipend
+- Number of openings
+- Internship duration
+- Work location
+- Application instructions
+- Eligibility criteria
+- Who can apply
+- Equal opportunity statements
+- Promotional content
+- Job portal advertisements
+- Certification advertisements
+- Recommended learning courses
+- "Learn..." sections (for example: Learn HTML, Learn VLSI, Learn AI in Data Science)
+- Suggested certifications
+- Footer content
+- Social media links
+- Contact information
+
+ONLY use the following sections for evaluation:
+
+- Job responsibilities
+- Required technical skills
+- Preferred technical skills
+- Qualifications
+- Experience requirements
+- Technologies
+- Frameworks
+- Programming languages
+- Tools
+- Software engineering responsibilities
+
+Never treat advertisements, certifications, recommended courses, or promotional text as job requirements.
 
 TECHNOLOGY ALIAS RULES
 
@@ -327,6 +367,18 @@ MongoDB Atlas → MongoDB
 * If no skills are missing, return:
   "missingSkills": []
   Do not return strings such as "None", "N/A", or "No missing skills".
+
+JOB DESCRIPTION FILTERING
+
+Before matching:
+
+1. Extract only the actual hiring requirements from the job description.
+2. Ignore company descriptions.
+3. Ignore "Learn..." or certification suggestions.
+4. Ignore perks, benefits, and application information.
+5. Ignore marketing or promotional content.
+6. Use only genuine technical requirements and responsibilities for comparison.
+
 
 MATCHING CRITERIA
 
