@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="ResumeScope Banner" width="100%">
+  <img src="images/banner.png" alt="ResumeScope Banner" width="100%">
 </p>
 
 # 🚀 ResumeScope
@@ -112,15 +112,15 @@ Explore the application's user interface and key features below.
 
 | Home Page | ATS Dashboard |
 |-----------|---------------|
-| ![ResumeScope Home Page](assets/home.png) | ![ATS Dashboard](assets/ats-dashboard.png) |
+| ![ResumeScope Home Page](images/home.png) | ![ATS Dashboard](images/ats-dashboard.png) |
 
 | Job Description | Job Match |
 |-----------------|-----------|
-| ![Job Description](assets/job-description.png) | ![Job Match Dashboard](assets/job-match.png) |
+| ![Job Description](images/job-description.png) | ![Job Match Dashboard](images/job-match.png) |
 
 | Career Roadmap | Interview Questions |
 |----------------|---------------------|
-| ![Career Roadmap](assets/career-roadmap.png) | ![Interview Questions](assets/interview-questions.png) |
+| ![Career Roadmap](images/career-roadmap.png) | ![Interview Questions](images/interview-questions.png) |
 
 ---
 
