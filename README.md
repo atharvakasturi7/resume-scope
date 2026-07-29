@@ -149,7 +149,7 @@ resume-scope/
 │   ├── server.js
 │   └── package.json
 │
-├── assets/
+├── images/
 ├── README.md
 └── LICENSE
 ```
